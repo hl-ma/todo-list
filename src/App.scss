@@ -1,0 +1,88 @@
+$button-color: #007bff;
+$button-hover-color: #0056b3;
+$button-active-color: #004085;
+$main-color: #3a3d40;
+$border-color: #ddd;
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  max-width: 800px;
+  margin: 0 auto;
+  height: 100vh;
+  padding: 30px;
+}
+
+header {
+  @include flex-center();
+  margin-bottom: 20px;
+  h1 {
+    font-size: 2.5rem;
+    color: $main-color;
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  background-color: #c3cfe2;
+  padding: 0 20px;
+}
+
+input {
+  padding: 10px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  background-color: $button-color;
+  color: white;
+  cursor: pointer;
+  margin: 5px;
+
+  &:hover {
+    background-color: $button-hover-color;
+  }
+
+  &.active {
+    background-color: $button-active-color;
+  }
+}
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid $border-color;
+  border-radius: 4px;
+  margin: 10px 0;
+  background-color: white;
+
+  button {
+    width: 100px;
+  }
+}
