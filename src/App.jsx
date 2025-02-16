@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Children, useState } from "react";
 import Task from "./components/Task";
 import "./App.scss";
 
@@ -7,22 +7,22 @@ function App() {
   const [newTask, setNewTask] = useState("");
   const [filterState, setFilterState] = useState("All");
 
-  const checkEmptyInput = () =>
+  const CheckEmptyInput = () =>
     newTask.trim() !== "" || (alert("Task cannot be empty!"), false);
 
-  const checkDuplicateInput = () =>
+  const CheckDuplicateInput = () =>
     !tasks.some(
       (task) => task.text.toLowerCase() === newTask.trim().toLowerCase()
     ) || (alert("Task already exists!"), false);
 
-  const isValidInput = () => checkEmptyInput() && checkDuplicateInput();
+  const isValidInput = () => CheckEmptyInput() && CheckDuplicateInput();
 
-  const addNewTask = () => {
+  const AddNewTask = () => {
     if (!isValidInput()) return;
     setTasks([...tasks, { text: newTask, completed: false }]), setNewTask("");
   };
 
-  const handleToggleTask = (index) => {
+  const HandleToggleTask = (index) => {
     setTasks((prevTasks) =>
       prevTasks.map((task, i) =>
         i === index ? { ...task, completed: !task.completed } : task
@@ -30,14 +30,23 @@ function App() {
     );
   };
 
-  const filteredTasks = tasks.filter((task) => {
-    const filterCondition = {
+  const FilteredTasks = tasks.filter((task) => {
+    const FilterCondition = {
       All: true,
       Completed: task.completed,
       Incomplete: !task.completed,
     };
-    return filterCondition[filterState];
+    return FilterCondition[filterState];
   });
+
+  const CreateFilterButton = ({ children }) => (
+    <button
+      className={filterState === children ? "active" : ""}
+      onClick={() => setFilterState(children)}
+    >
+      {children}
+    </button>
+  );
 
   return (
     <div className="container">
@@ -52,37 +61,22 @@ function App() {
             onChange={(e) => setNewTask(e.target.value)}
             placeholder="Add a new task"
           />
-          <button onClick={addNewTask}>Add Task</button>
+          <button onClick={AddNewTask}>Add Task</button>
         </div>
         <div className="task-list-header">
           <h2>Tasks List</h2>
           <div className="filter-buttons">
-            <button
-              className={filterState === "All" ? "active" : ""}
-              onClick={() => setFilterState("All")}
-            >
-              All
-            </button>
-            <button
-              className={filterState === "Completed" ? "active" : ""}
-              onClick={() => setFilterState("Completed")}
-            >
-              Completed
-            </button>
-            <button
-              className={filterState === "Incomplete" ? "active" : ""}
-              onClick={() => setFilterState("Incomplete")}
-            >
-              Incomplete
-            </button>
+            <CreateFilterButton>All</CreateFilterButton>
+            <CreateFilterButton>Completed</CreateFilterButton>
+            <CreateFilterButton>Incomplete</CreateFilterButton>
           </div>
         </div>
         <div className="task-list">
-          {filteredTasks.map((task, index) => (
+          {FilteredTasks.map((task, index) => (
             <Task
               key={index}
               task={task}
-              onComplete={() => handleToggleTask(index)}
+              onComplete={() => HandleToggleTask(index)}
             />
           ))}
         </div>
@@ -93,5 +87,9 @@ function App() {
     </div>
   );
 }
+
+App.propTypes = {
+  children: Children,
+};
 
 export default App;
