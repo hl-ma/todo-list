@@ -2,12 +2,7 @@ import PropTypes from "prop-types";
 
 function Task({ task, onComplete }) {
   return (
-    <div
-      className={`task ${task.completed ? "completed" : ""}`}
-      style={{
-        backgroundColor: task.completed ? "lightgray" : "white",
-      }}
-    >
+    <div className={`task ${task.completed ? "completed" : ""}`}>
       <span
         style={{
           textDecoration: task.completed ? "line-through" : "none",
@@ -19,7 +14,7 @@ function Task({ task, onComplete }) {
       <button
         onClick={onComplete}
         style={{
-          color: task.completed ? "darkred" : "white",
+          color: task.completed ? "whitesmoke" : "white",
           backgroundColor: task.completed ? "gray" : "",
         }}
       >

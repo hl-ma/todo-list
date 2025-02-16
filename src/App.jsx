@@ -57,11 +57,22 @@ function App() {
         <div className="task-list-header">
           <h2>Tasks List</h2>
           <div className="filter-buttons">
-            <button onClick={() => setFilterState("All")}>All</button>
-            <button onClick={() => setFilterState("Completed")}>
+            <button
+              className={filterState === "All" ? "active" : ""}
+              onClick={() => setFilterState("All")}
+            >
+              All
+            </button>
+            <button
+              className={filterState === "Completed" ? "active" : ""}
+              onClick={() => setFilterState("Completed")}
+            >
               Completed
             </button>
-            <button onClick={() => setFilterState("Incomplete")}>
+            <button
+              className={filterState === "Incomplete" ? "active" : ""}
+              onClick={() => setFilterState("Incomplete")}
+            >
               Incomplete
             </button>
           </div>
