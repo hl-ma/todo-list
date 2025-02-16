@@ -15,10 +15,10 @@ function App() {
       (task) => task.text.toLowerCase() === newTask.trim().toLowerCase()
     ) || (alert("Task already exists!"), false);
 
-  const isValidInput = () => CheckEmptyInput() && CheckDuplicateInput();
+  const IsValidInput = () => CheckEmptyInput() && CheckDuplicateInput();
 
   const AddNewTask = () => {
-    if (!isValidInput()) return;
+    if (!IsValidInput()) return;
     setTasks([...tasks, { text: newTask, completed: false }]), setNewTask("");
   };
 
