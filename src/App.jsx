@@ -50,11 +50,11 @@ function App() {
     );
   };
 
-  const DeleteTask = (index) => {
+  const deleteTask = (index) => {
     setTaskList((prevTasks) => prevTasks.filter((_, i) => i !== index));
   };
 
-  const FilteredTasks = taskList.filter((task) => {
+  const filteredTasks = taskList.filter((task) => {
     const FilterCondition = {
       All: true,
       Completed: task.completed,
@@ -101,12 +101,12 @@ function App() {
           </div>
         </div>
         <div className="task-list">
-          {FilteredTasks.map((task, index) => (
+          {filteredTasks.map((task, index) => (
             <Task
               key={index}
               task={task}
               onComplete={() => handleToggleTask(index)}
-              onDelete={() => DeleteTask(index)}
+              onDelete={() => deleteTask(index)}
               onEdit={() => handleEditTask(index)}
               onSave={(newText) => handleEditTask(index, newText)}
               tasklist={taskList}
